@@ -6,6 +6,7 @@ import {
   PlusCircleIcon,
   RssIcon
 } from '@heroicons/react/outline'
+import Link from 'next/link'
 
 const sidebarItems = [
   {
@@ -39,12 +40,18 @@ const Sidebar = () => {
     <div className="bg-gray-900 p-8 min-h-screen">
       {sidebarItems.map((item, index) => (
         <>
-          <div className="flex items-center mb-2">
-            <button className="text-gray-300 w-5 h-5 mr-3">
+          <button
+            className="flex items-center mb-2 text-gray-300 hover:text-white" 
+          >
+            <span
+              className="w-5 h-5 mr-3" 
+            >
               {item.icon}
-            </button>
-            <p className="text-gray-300">{item.title}</p>
-          </div>
+            </span>
+            <p
+              className="font-medium" 
+            >{item.title}</p>
+          </button>
           {index === 2 && (
             <hr className="text-gray-800 my-4" />
           )}
