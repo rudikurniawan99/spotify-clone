@@ -37,7 +37,7 @@ const sidebarItems = [
 
 const Sidebar = () => {
   return (
-    <div className="bg-gray-900 p-8 min-h-screen">
+    <div className="p-5 min-h-screen border-r border-gray-800">
       {sidebarItems.map((item, index) => (
         <>
           <button
@@ -49,7 +49,6 @@ const Sidebar = () => {
               {item.icon}
             </span>
             <p
-              className="font-medium" 
             >{item.title}</p>
           </button>
           {index === 2 && (
@@ -58,6 +57,26 @@ const Sidebar = () => {
         </>
       ))}
       <hr className="text-gray-800 my-4" />
+      <div className="text-gray-300 hover:text-white mb-3">
+        <button>
+          <p>Playlist Name..</p>
+        </button>
+      </div>
+      <div className="text-gray-300 hover:text-white mb-3">
+        <button>
+          <p>Playlist Name..</p>
+        </button>
+      </div>
+      <div className="text-gray-300 hover:text-white mb-3">
+        <button>
+          <p>Playlist Name..</p>
+        </button>
+      </div>
+      <div className="text-gray-300 hover:text-white mb-3">
+        <button>
+          <p>Playlist Name..</p>
+        </button>
+      </div>
     </div>
   )
 }
