@@ -6,7 +6,6 @@ import {
   PlusCircleIcon,
   RssIcon
 } from '@heroicons/react/outline'
-import Link from 'next/link'
 
 const sidebarItems = [
   {
