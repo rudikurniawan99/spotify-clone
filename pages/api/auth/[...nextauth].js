@@ -12,10 +12,11 @@ export default NextAuth({
   ],
   secret: process.env.JWT_SECRET,
   pages: {
-    signIn: '/auth/login'
+    signIn: '/login'
   },
   callbacks: {
     async jwt({ token, user, account }){
+      // initial signIn
       if(account && user){
         return {
           ...token,
@@ -25,11 +26,21 @@ export default NextAuth({
           accessTokenExpires: account.expires_at * 1000
         }
       }
+
+      // return previous token if the access token not yet expires
       if(Date.now() < account.accessTokenExpires){
         return token
       }
 
+      // if access token expired, to refresh it
       return await refreshAccessToken(token)
+    },
+    async session({ session, token }){
+      session.user.accessToken = token.accessToken,
+      session.user.refreshToken = token.refreshToken,
+      session.user.username = token.username
+
+      return session
     }
   }
 
@@ -42,11 +53,17 @@ const refreshAccessToken = async (token) => {
 
     const { body: refreshedToken } = await spotifyApi.refreshAccessToken
 
+    return {
+      accessToken: refreshedToken.access_token,
+      accessTokenExpires:   Date.now() + refreshedToken.expires_in * 1000,
+      refreshedToken: refreshedToken.refresh_token ?? token.refreshToken
+    }
+
   } catch (e) {
-    console.log(e) 
+    console.error(e)
     return {
       ...token,
-      error: 'Refresh Token Error'
+      error: 'RefreshAccessTokenError'
     }
   }
 }
