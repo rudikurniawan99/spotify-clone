@@ -23,12 +23,12 @@ export default NextAuth({
           accessToken: account.access_token,
           refreshToken: account.refresh_token,
           username: account.providerAccountId,
-          accessTokenExpires: account.expires_at * 1000
+          accessTokenExpires: account.expires_at * 1000,
         }
       }
 
       // return previous token if the access token not yet expires
-      if(Date.now() < account.accessTokenExpires){
+      if(Date.now() < token.accessTokenExpires){
         return token
       }
 
@@ -51,11 +51,13 @@ const refreshAccessToken = async (token) => {
     spotifyApi.setAccessToken(token.accessToken)
     spotifyApi.setRefreshToken(token.refreshToken)
 
-    const { body: refreshedToken } = await spotifyApi.refreshAccessToken
+    const { body: refreshedToken } = await spotifyApi.refreshAccessToken()
+    console.log('refreshToken: ',refreshedToken)
 
     return {
+      ...token,
       accessToken: refreshedToken.access_token,
-      accessTokenExpires:   Date.now() + refreshedToken.expires_in * 1000,
+      accessTokenExpires: Date.now() + refreshedToken.expires_in * 1000,
       refreshedToken: refreshedToken.refresh_token ?? token.refreshToken
     }
 
