@@ -43,9 +43,8 @@ const Sidebar = () => {
     <div className="p-5 min-h-screen border-r border-gray-800">
       {session ?(
         <>
-          <p>signed as {session.user.name} </p>
           <button 
-            className="px-3 py-1 bg-red-500 mb-3"
+            className="w-full py-1 bg-red-500 hover:bg-red-600 mb-3 text-white"
             onClick={() => signOut()}
           >signOut</button>
         </>
