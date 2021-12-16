@@ -41,20 +41,6 @@ const Sidebar = () => {
 
   return (
     <div className="p-5 border-r h-screen border-gray-800 overflow-y-scroll scrollbar-hide">
-      {session ?(
-        <>
-          <button 
-            className="w-full py-1 bg-red-500 hover:bg-red-600 mb-3 text-white"
-            onClick={() => signOut()}
-          >signOut</button>
-        </>
-      ):(
-        <>
-          <div className="text-white mb-3">
-            Guest
-          </div>
-        </>
-      )}
       {sidebarItems.map((item, index) => (
         <div
           key={index} 
