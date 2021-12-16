@@ -1,8 +1,8 @@
-# Next.js + Tailwind CSS Example
+# Spotify Clone
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+This project is a dummy project for learning NextJS, and Next Auth. This project based on tutorial from [Sonny Sangha](https://www.youtube.com/watch?v=3xrko3GpYoU) 
 
-## Preview
+<!-- ## Preview
 
 Preview the example live on [StackBlitz](http://stackblitz.com/):
 
@@ -13,15 +13,15 @@ Preview the example live on [StackBlitz](http://stackblitz.com/):
 Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
+ -->
 ## How to use
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
+* clone this repo,
+* create spotify service to get clientId, and clientSecret, [here](https://developer.spotify.com/documentation/general/guides/authorization/app-settings/)
+* copy `.env.local.example` file and rename it as `.env.local` 
+* enter your jwt secret, spotify clientId, and clientSecret to `.env.local`
+* run this bash command: 
 ```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+yarn install
+yarn run dev
 ```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
