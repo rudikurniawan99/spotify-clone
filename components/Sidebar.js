@@ -54,7 +54,6 @@ const Sidebar = () => {
     }
   },[session, spotifyApi])
 
-  console.log(playlistId)
   return (
     <div className="p-5 border-r h-screen border-gray-800 overflow-y-scroll scrollbar-hide">
       {sidebarItems.map((item, index) => (

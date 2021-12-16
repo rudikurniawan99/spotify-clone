@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { signOut, useSession } from 'next-auth/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { playlistIdState, playlistState } from '../atoms/playlistAtom'
+import useSpotify from '../hooks/useSpotify'
+import Song from './Song'
 
 const Center = () => {
 
   const { data: session } = useSession()
+  const spotifyApi = useSpotify()
+  const playlistId = useRecoilValue(playlistIdState)
+  const [playlist, setPlaylist] = useRecoilState(playlistState)
+
+  useEffect(() => {
+    if(spotifyApi.getAccessToken()){
+      spotifyApi.getPlaylist(playlistId).then((data) => {
+        setPlaylist(data.body)
+      }).catch((e) => {
+        console.error(e);
+      })
+    }
+  },[playlistId, spotifyApi])
+
+  console.log(playlist?.tracks?.items)
+
   return (
     <div className="h-screen overflow-y-scroll scrollbar-hide">
       <div className={`h-64 bg-gradient-to-b from-green-700 to-gray-900 relative p-5`}>
@@ -21,12 +41,23 @@ const Center = () => {
           </button>
         </div>
         <div className="absolute bottom-5 flex">
-          <img src="" alt="" className="w-48 h-48 bg-blue-500 rounded-md" />
+          <img src={playlist?.images[0]?.url} alt="" className="w-48 h-48 bg-blue-500 rounded-md" />
           <div className="self-end ml-2 mb-2 text-white">
             <p className="mb-1">PLAYLIST</p>
-            <h1 className="text-5xl">Playlist Title goes here</h1>
+            <h1 className="text-5xl">{playlist?.name}</h1>
           </div>
         </div>
+      </div>
+      <div className="p-5 space-y-3">
+        {playlist?.tracks?.items.map((track, i) => (
+          <div
+            key={i} 
+          >
+            <Song
+              track={track.track}
+            />
+          </div>
+        ))}
       </div>
     </div>
   )
