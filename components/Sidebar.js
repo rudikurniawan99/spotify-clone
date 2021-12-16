@@ -40,7 +40,7 @@ const Sidebar = () => {
   const { data: session } = useSession()
 
   return (
-    <div className="p-5 min-h-screen border-r border-gray-800">
+    <div className="p-5 border-r h-screen border-gray-800 overflow-y-scroll scrollbar-hide">
       {session ?(
         <>
           <button 

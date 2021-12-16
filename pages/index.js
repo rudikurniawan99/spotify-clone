@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Center from '../components/Center'
 import Sidebar from '../components/Sidebar'
 
 export default function Home() {
@@ -8,9 +9,12 @@ export default function Home() {
         <title>Spotify Clone</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <div className="lg:w-1/4">
+      <main className="flex">
+        <div className="w-1/4">
           <Sidebar/>
+        </div>
+        <div className="w-3/4">
+          <Center/>
         </div>
         {/* main pages */}
       </main>
