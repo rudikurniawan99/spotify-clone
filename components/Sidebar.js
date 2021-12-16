@@ -6,7 +6,9 @@ import {
   PlusCircleIcon,
   RssIcon
 } from '@heroicons/react/outline'
-import { useSession, signOut } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
+import useSpotify from '../hooks/useSpotify'
 
 const sidebarItems = [
   {
@@ -38,6 +40,18 @@ const sidebarItems = [
 const Sidebar = () => {
 
   const { data: session } = useSession()
+  const spotifyApi = useSpotify()
+  const [playlists, setplaylists] = useState([])
+
+  useEffect(() => {
+    if(spotifyApi.getAccessToken()){
+      spotifyApi.getUserPlaylists().then((data) => {
+        setplaylists(data.body.items)
+      })
+    }
+  },[session, spotifyApi])
+
+  console.log(playlists)
 
   return (
     <div className="p-5 border-r h-screen border-gray-800 overflow-y-scroll scrollbar-hide">
@@ -62,26 +76,17 @@ const Sidebar = () => {
         </div>
       ))}
       <hr className="text-gray-800 my-4" />
-      <div className="text-gray-300 hover:text-white mb-3">
-        <button>
-          <p>Playlist Name..</p>
-        </button>
-      </div>
-      <div className="text-gray-300 hover:text-white mb-3">
-        <button>
-          <p>Playlist Name..</p>
-        </button>
-      </div>
-      <div className="text-gray-300 hover:text-white mb-3">
-        <button>
-          <p>Playlist Name..</p>
-        </button>
-      </div>
-      <div className="text-gray-300 hover:text-white mb-3">
-        <button>
-          <p>Playlist Name..</p>
-        </button>
-      </div>
+      {playlists.map((playlist) => (
+        <div 
+          key={playlist.id}
+          className="text-gray-300 hover:text-white mb-3"
+        >
+          <button>
+            <p>{playlist.name}</p>
+          </button>
+        </div>
+      ))}
+      
     </div>
   )
 }
