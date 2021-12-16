@@ -10,10 +10,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex">
-        <div className="w-1/4">
+        <div className="w-1/5">
           <Sidebar/>
         </div>
-        <div className="w-3/4">
+        <div className="w-full">
           <Center/>
         </div>
         {/* main pages */}
