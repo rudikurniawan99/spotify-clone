@@ -5,6 +5,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { playlistIdState, playlistState } from '../atoms/playlistAtom'
 import useSpotify from '../hooks/useSpotify'
 import Song from './Song'
+import Songs from './Songs'
 
 const Center = () => {
 
@@ -48,17 +49,9 @@ const Center = () => {
           </div>
         </div>
       </div>
-      <div className="p-5 space-y-3">
-        {playlist?.tracks?.items.map((track, i) => (
-          <div
-            key={i} 
-          >
-            <Song
-              track={track.track}
-            />
-          </div>
-        ))}
-      </div>
+      <Songs
+        tracks={playlist?.tracks} 
+      /> 
     </div>
   )
 }
